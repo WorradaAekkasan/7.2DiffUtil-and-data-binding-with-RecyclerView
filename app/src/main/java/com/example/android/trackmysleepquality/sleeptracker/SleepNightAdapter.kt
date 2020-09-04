@@ -1,8 +1,6 @@
 package com.example.android.trackmysleepquality.sleeptracker
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,17 +25,14 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.ViewHolder>(
     }
 
     class ViewHolder private constructor(val binding: ListItemSleepNightBinding) : RecyclerView.ViewHolder(binding.root){
-        val sleepLength: TextView = binding.findViewById(R.id.sleep_length)
-        val quality: TextView = binding.findViewById(R.id.quality_string)
-        val qualityImage: ImageView = binding.findViewById(R.id.quality_image)
 
         fun bind(item: SleepNight) {
             val res = itemView.context.resources
-            sleepLength.text = convertDurationToFormatted(
+            binding.sleepLength.text = convertDurationToFormatted(
                     item.startTimeMilli, item.endTimeMilli, res)
-            quality.text = convertNumericQualityToString(
+            binding.qualityString.text = convertNumericQualityToString(
                     item.sleepQuality, res)
-            qualityImage.setImageResource(when (item.sleepQuality) {
+            binding.qualityImage.setImageResource(when (item.sleepQuality) {
                 0 -> R.drawable.ic_sleep_0
                 1 -> R.drawable.ic_sleep_1
                 2 -> R.drawable.ic_sleep_2
